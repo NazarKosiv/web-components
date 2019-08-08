@@ -10,6 +10,10 @@ const tmplInnerHtml = `
         .title {
             color: red;
         }
+
+        :host([mobile]) .header {
+            text-transform: uppercase;
+        }
     </style>
     <header class="header">
         <h1 class="title"></h1>
@@ -22,12 +26,18 @@ export default class AppHeader extends CustomComponent {
     }
 
     public static get observedAttributes(): string[] {
-        return ['title']
+        return ['title', 'mobile']
     }
 
     public attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
-        if (attrName === AppHeader.observedAttributes[0]) {
-            this.handleTitleChange(oldVal, newVal);
+        switch(attrName) {
+            case AppHeader.observedAttributes[0]:
+                this.handleTitleChange(oldVal, newVal);
+                break;
+
+            case AppHeader.observedAttributes[1]:
+                this.handleTitleColorChange(oldVal, newVal);
+                break;
         }
     }
 
@@ -35,6 +45,9 @@ export default class AppHeader extends CustomComponent {
         if (oldTitle !== newTitle) {
             this.changeTitle();
         }
+    }
+
+    private handleTitleColorChange(oldVal: string, newVal: string) {
     }
 
     private changeTitle(): void {

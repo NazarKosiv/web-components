@@ -23,5 +23,17 @@ export default class AppHeaderContainer extends CustomComponent {
             .subscribe((title: string) => {
                 this.appHeader.setAttribute('title', title);
             })
+
+        this.store.isMobile$
+            .pipe(
+                takeUntil(this.onDestroy$)
+            )
+            .subscribe((isMobile: boolean) => {
+                if (isMobile) {
+                    this.appHeader.setAttribute('mobile', 'mobile');
+                } else {
+                    this.appHeader.removeAttribute('mobile');
+                }
+            })
     }
 }
