@@ -8,13 +8,11 @@ module.exports = {
     mode: 'development',
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, './build')
+        path: path.resolve(__dirname, 'dist')
     },
     devServer: {
-        contentBase: path.join(__dirname, 'src'),
-        compress: true,
-        port: 9000,
-        index: 'index.html'
+        contentBase: path.resolve(__dirname, 'dist'),
+        port: 9000
     },
     devtool: 'source-map',
     module: {
@@ -46,7 +44,8 @@ module.exports = {
     },
     plugins: [
         new HTMLWebpackPlugin({
-            template: path.resolve(__dirname, './index.html')
+            template: 'src/index.html',
+            filename: 'index.html'
         })
     ]
 };
