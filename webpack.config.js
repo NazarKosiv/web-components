@@ -27,15 +27,7 @@ module.exports = {
             {
                 use: [
                     'style-loader',
-                    'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: path.resolve(__dirname)
-                            }
-                        }
-                    },
+                    'css-loader'
                 ],
                 test: /\.css$/
             },
@@ -43,15 +35,8 @@ module.exports = {
                 use: [
                     'style-loader',
                     'css-loader',
-                    {
-                        loader: 'postcss-loader',
-                        options: {
-                            config: {
-                                path: path.resolve(__dirname)
-                            }
-                        }
-                    },
-                    'sass-loader'],
+                    'sass-loader'
+                ],
                 test: /\.(scss|sass)$/
             }
         ]
