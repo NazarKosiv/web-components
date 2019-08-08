@@ -1,7 +1,13 @@
 import AppHeader from './components/app-header';
+import AppRoot from './components/app-root';
+import AppForm from './components/app-form';
+import AppHeaderContainer from './containers/app-header-container';
 
 const components = [
-    AppHeader
+    AppRoot,
+    AppHeader,
+    AppForm,
+    AppHeaderContainer
 ]
 
 components.forEach((component) => {

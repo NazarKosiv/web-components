@@ -1,10 +1,14 @@
-const tmpl = document.createElement('template');
-tmpl.innerHTML = `
+import CustomComponent from "../shared/components/custom-component";
+
+const tmplInnerHtml = `
     <style>
-        :host {
-            .title {
-                color: red;
-            }
+        .header {
+            display: flex;
+            justify-content: center;
+        }
+
+        .title {
+            color: red;
         }
     </style>
     <header class="header">
@@ -12,27 +16,13 @@ tmpl.innerHTML = `
     </header>
 `;
 
-export default class AppHeader extends HTMLElement {
-    private _title: string = 'Default Title';
-    public set title(title: string) {
-        this._title = title;
-    }
-    public get title(): string {
-        return this._title;
-    }
-
+export default class AppHeader extends CustomComponent {
     constructor() {
-        super();
-        const shadowRoot = this.attachShadow({ mode: 'open' });
-        shadowRoot.appendChild(tmpl.content.cloneNode(true));
+        super(tmplInnerHtml);
     }
 
     public static get observedAttributes(): string[] {
         return ['title']
-    }
-
-    public connectedCallback(): void {
-        this.changeTitle();
     }
 
     public attributeChangedCallback(attrName: string, oldVal: any, newVal: any): void {
@@ -43,7 +33,6 @@ export default class AppHeader extends HTMLElement {
 
     private handleTitleChange(oldTitle: string, newTitle: string): void {
         if (oldTitle !== newTitle) {
-            this.title = newTitle;
             this.changeTitle();
         }
     }
